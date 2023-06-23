@@ -1,18 +1,33 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <DataCard :data="tableData[0]"></DataCard>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import DataCard from "../components/DataCard.vue";
+import ldata from "../assets/data.json";
 export default {
-  name: 'HomeView',
   components: {
-    HelloWorld
-  }
-}
+    DataCard,
+  },
+  data() {
+    return {
+      tableData: [],
+    };
+  },
+  methods: {
+    async init() {
+      this.tableData = await this.getData();
+    },
+    async getData() {
+      const res = [ldata];
+      return res;
+    },
+  },
+  mounted() {
+    this.init();
+    console.log(ldata);
+  },
+};
 </script>
